@@ -8,6 +8,8 @@
 * Make API request to update BC price amount
 * List out account balances
 * Deploy 
+* Build up React from scratch inside the index.html file 
+* Move into a create-react-app application
 
 
 
