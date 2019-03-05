@@ -1,2 +1,88 @@
-<h1>Contentful-Coinbase project</h1>
-<h2>Built by Karla</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contentful-Coinbase API</title>
+    <script src="https://unpkg.com/@babel/standalone@7.2.5/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.0.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.0.0/umd/react-dom.development.js"></script>
+   </head>
+  <body>
+    <div id="app"></div>
+
+    <script type='text/babel'>
+      class HeaderComponent extends React.Component {
+        render() {
+          return (
+            <div>
+              <h3>Bitcoin Price Today</h3>
+            </div>
+          );
+        }
+      }
+
+      class TickerComponent extends React.Component {
+        render() {
+          return (
+            <div>
+              <h3>{this.props.price} BTC-USD </h3>
+              </div>
+          );
+        }
+      }
+
+      class ApplicationComponent extends React.Component {
+        constructor() {
+          super();
+          this.state = { bitcoinPrice: 0.0 };
+        }
+
+        getPrice = () => {
+          return this.state.bitcoinPrice;
+        }
+
+        onTheButtonClick = () => {
+          // this.setState({
+          //   bitcoinPrice: 3012.38
+          // })
+
+          fetch('http://example.com/movies.json')
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(myJson) {
+            console.log(JSON.stringify(myJson));
+          });
+
+
+
+          fetch('/price')
+          .then(function(response) {
+            return response.json();
+          })
+          .then((xyz) => {
+            console.log(xyz)
+            // this.setState({
+            //   bitcoinPrice: data.amount
+            // });
+          });
+
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>Contentful-Coinbase Integration</h1>
+              <h2>Made by Karla</h2>
+              <HeaderComponent />
+              <TickerComponent price={this.getPrice()} />
+              <button onClick={this.onTheButtonClick}>Hi Karla</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render( <ApplicationComponent />, document.getElementById('app'));
+    </script>
+  </body>
+</html>
