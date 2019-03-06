@@ -31,52 +31,70 @@
         }
       }
 
+      class PostComponent extends React.Component {
+        render() {
+          return(
+            <div>
+              <h2>{this.props.title}</h2>
+              <div>{this.props.body}</div>
+              </div>
+          );
+        }
+      }
+
       class ApplicationComponent extends React.Component {
         constructor() {
           super();
-          this.state = { bitcoinPrice: 0.0 };
+          this.state = { bitcoinPrice: 0.0, contentfulData: [] };
         }
 
         getPrice = () => {
           return this.state.bitcoinPrice;
         }
 
-        onTheButtonClick = () => {
-          // this.setState({
-          //   bitcoinPrice: 3012.38
-          // })
-
-          fetch('http://example.com/movies.json')
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(myJson) {
-            console.log(JSON.stringify(myJson));
-          });
-
-
-
+        componentDidMount = () => {
           fetch('/price')
           .then(function(response) {
             return response.json();
           })
-          .then((xyz) => {
-            console.log(xyz)
-            // this.setState({
-            //   bitcoinPrice: data.amount
-            // });
+          .then((data) => {
+            this.setState({
+              bitcoinPrice: data.amount
+            });
           });
 
-        }
+          fetch('/content')
+          .then(function(response) {
+            return response.json();
+          })
+          .then((data) => {
+            this.setState({
+            contentfulData: data 
+            })
+          });
+       }
 
+        getContentfulData = () => {
+          return this.state.contentfulData;
+         }
+         
+       
         render() {
+          const postComponents = this.getContentfulData().map(function(element, index){
+            return(<PostComponent title={element.title} body={element.body} key={index}/>)
+          })
+          // <PostComponent title="Why you need..." content="Financial" />
+          // <PostComponent title="How Zk-Snarks..." content="xyz" />
+          // <PostComponent title="Comparing.." content="xyz" />
+          // <PostComponent title="Coinbase acquires..." content="xyz" />
+
           return (
             <div>
               <h1>Contentful-Coinbase Integration</h1>
               <h2>Made by Karla</h2>
               <HeaderComponent />
               <TickerComponent price={this.getPrice()} />
-              <button onClick={this.onTheButtonClick}>Hi Karla</button>
+              {postComponents}
             </div>
           );
         }
