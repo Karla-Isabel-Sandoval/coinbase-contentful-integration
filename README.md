@@ -17,6 +17,9 @@
 * Pushing project to GH - making it organized
 * Recap of code I'll be explaining 
 
+* Two hours slides
+* Three hours code
+* Two hours presenting practice - recap of code
 
 
 
