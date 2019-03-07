@@ -1,28 +1,11 @@
-# Coinbase API Project
+# Coinbase / Contentful API Integration
 
-## Next steps 
-* Push to GH
-* Set up template engine
-* Move about page into template
-* Move index page into template
-* Make API request to update BC price amount
-* List out account balances
-* Deploy 
-* Build up React from scratch inside the index.html file 
-* Move into a create-react-app application
+This project integrates with the Coinbase and Contentful APIs. 
 
-* Build out integration for Contentful
-* Refactor HTML app from way that's accepted to be standard to create-react-app form ( option to do the above as well)
+## API Backend - ExpressJS
 
-* Pushing project to GH - making it organized
-* Recap of code I'll be explaining 
+Run the API backend using ExpressJS located in the `index.js` file.  Run this on port 3000.
 
-* Two hours slides
-* Three hours code
-* Two hours presenting practice - recap of code
+## React Front-end
 
-
-
-
-
-
+The front-end of the application was built using React.  The `create-react-app` that performs this integration is in the `fe` folder.
