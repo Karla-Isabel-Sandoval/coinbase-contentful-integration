@@ -2,7 +2,7 @@ const Client = require('coinbase').Client;
 const express = require('express');
 const contentful = require('contentful');
 const path = require('path');
-var cors = require('cors');
+const cors = require('cors');
 
 var whitelist = ['http://localhost:3001', 'http://localhost:3000']
 var corsOptions = {
@@ -17,11 +17,11 @@ var corsOptions = {
 
 // Then pass them to cors:
 
-const SPACE_ID = '7yubk7dp5oio';
-const ACCESS_TOKEN = '87a9791be0ceec922583ec5f647f2f2660799fabec2b5bd255feaad401ada921';
+const SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
+const ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
 
-const coinbaseClient = new Client({'apiKey': 'rSPd8ob9NO8IT5vK', 'apiSecret': 'dPqGqtjOi0Nggr5XT8ZuhZmBr8bgRBfs'});
+const coinbaseClient = new Client({'apiKey': process.env.COINBASE_API_KEY, 'apiSecret': process.env.COINBASE_API_SECRET});
 const app = express();
 app.use(cors(corsOptions));
 
