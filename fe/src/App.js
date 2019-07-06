@@ -28,7 +28,7 @@ class App extends Component {
       });
     });
 
-  fetch('http://localhost:3000/content')
+    fetch('http://localhost:3000/content')
     .then(function(response) {
       return response.json();
     })
