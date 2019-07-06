@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Header from './Header.js';
-import Ticker from './Ticker.js';
 import Post from './Post.js';
+import { withLDProvider } from 'launchdarkly-react-client-sdk';
+import BtcPrice from './BtcPrice';
 
 
 class App extends Component {
@@ -29,7 +28,44 @@ class App extends Component {
       });
     });
 
-    fetch('http://localhost:3000/content')
+    // (function() {
+    //   this.a = 10;
+    //   function sayHello() {
+    //     this.b = 20;
+    //     function addNumbers() {
+    //       return this.a + this.b;
+    //     }
+    //     alert(addNumbers());
+    //   }
+    //   sayHello();
+    // })();
+
+    // What we did:
+    // 1. use setInterval in the componentDidMount method and trigger an update to our API every 1000 ms
+    // 2. used arrow function (es6) to lock the value of `this`
+    // 3. call setState with the response from the coinbase API example
+
+    // TODO:
+    // 1. refactor code (no longer need 2 api calls to the same endpoint)
+    // 2. commit and push
+
+
+    const updateBtcPrice = () => {
+      fetch('http://localhost:3000/price')
+      .then(function(response) {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({
+          bitcoinPrice: data.amount
+        });
+      });
+  
+    }
+    
+    setInterval(updateBtcPrice, 1000);
+
+  fetch('http://localhost:3000/content')
     .then(function(response) {
       return response.json();
     })
@@ -55,8 +91,7 @@ class App extends Component {
       <div className="App">
           <h1>Contentful-Coinbase Integration</h1>
           <h2>Made by Karla</h2>
-          <Header/>
-          <Ticker price={this.getPrice()}/>
+          <BtcPrice price={this.getPrice()}/>
           {postComponents}
       </div>
     );
@@ -64,4 +99,8 @@ class App extends Component {
 
 }
 
-export default App;
+export default withLDProvider({ 
+  clientSideID: '5d210846fda0f10766fdfd94',
+  options: { }
+})(App);
+  
