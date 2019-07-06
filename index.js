@@ -40,7 +40,7 @@ app.get('/', function (req, res) {
   // GET "/price"
 app.get('/price', function (req, resp) {
   coinbaseClient.getBuyPrice({'currencyPair': 'BTC-USD'}, function(err, obj) {
-    const info = { amount: 9500 };
+    const info = { amount: obj.data.amount };
     resp.send(JSON.stringify(info));
   });
 });

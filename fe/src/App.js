@@ -28,28 +28,6 @@ class App extends Component {
       });
     });
 
-    // (function() {
-    //   this.a = 10;
-    //   function sayHello() {
-    //     this.b = 20;
-    //     function addNumbers() {
-    //       return this.a + this.b;
-    //     }
-    //     alert(addNumbers());
-    //   }
-    //   sayHello();
-    // })();
-
-    // What we did:
-    // 1. use setInterval in the componentDidMount method and trigger an update to our API every 1000 ms
-    // 2. used arrow function (es6) to lock the value of `this`
-    // 3. call setState with the response from the coinbase API example
-
-    // TODO:
-    // 1. refactor code (no longer need 2 api calls to the same endpoint)
-    // 2. commit and push
-
-
     const updateBtcPrice = () => {
       fetch('http://localhost:3000/price')
       .then(function(response) {
