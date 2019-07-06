@@ -28,21 +28,6 @@ class App extends Component {
       });
     });
 
-    const updateBtcPrice = () => {
-      fetch('http://localhost:3000/price')
-      .then(function(response) {
-        return response.json();
-      })
-      .then((data) => {
-        this.setState({
-          bitcoinPrice: data.amount
-        });
-      });
-  
-    }
-    
-    setInterval(updateBtcPrice, 1000);
-
   fetch('http://localhost:3000/content')
     .then(function(response) {
       return response.json();
